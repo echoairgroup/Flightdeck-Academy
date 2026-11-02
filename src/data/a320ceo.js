@@ -292,7 +292,7 @@ function add(id, title, view, x, y, description, purpose, context, group = '') {
   ['mcdu-num-7','Numeric key 7',20,94,'Numerieke invoertoets 7.','Voert het cijfer 7 in.','Een numerieke invoer wordt meestal eerst in het scratchpad gezet.'],
   ['mcdu-num-8','Numeric key 8',29,93,'Numerieke invoertoets 8.','Voert het cijfer 8 in.','De MCDU verwerkt invoer volgens veldvalidatie.'],
   ['mcdu-num-9','Numeric key 9',38,92,'Numerieke invoertoets 9.','Voert het cijfer 9 in.','Gebruik de toets voor getallen in toegestane invoervelden.'],
-  ['mcdu-num-0','Numeric input 0',20,101,'Numerieke invoertoets 0.','Voert het cijfer 0 in.','De toets zit onderaan het numerieke deel van het keypad.'],
+  ['mcdu-num-0','Numeric input 0',20,98,'Numerieke invoertoets 0.','Voert het cijfer 0 in.','De toets zit onderaan het numerieke deel van het keypad.'],
   ['mcdu-plusminus','Plus / minus key',47,99,'Plus/min-toets.','Voegt een plus- of minteken toe aan een numerieke invoer.','De geldigheid van het teken is afhankelijk van het veld.'],
   ['mcdu-dot','Decimal point key',56,98,'Decimal point key.','Voert een decimaalteken in.','Notatie en toegestane precisie zijn veldafhankelijk.'],
   ['mcdu-slash','Slash key',65,97,'Slash key.','Voert een schuine streep in.','Wordt gebruikt in velden die deze notatie ondersteunen.'],
