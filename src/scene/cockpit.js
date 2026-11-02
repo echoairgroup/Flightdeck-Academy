@@ -133,11 +133,11 @@ export class CockpitScene {
       const x = -2.55 + i * 0.465;
       const knob = new THREE.Mesh(new THREE.CylinderGeometry(0.095, 0.095, 0.13, 24), metal);
       knob.rotation.x = Math.PI / 2;
-      knob.position.set(x, 1.92, 1.43);
+      knob.position.set(x, 1.92, 2.01);
       this.scene.add(knob);
     }
     for (let i = 0; i < 15; i++) {
-      this.addBox(this.scene, 'FCU pushbutton', [-2.7 + i * 0.385, 1.78, 1.49], [0.24, 0.09, 0.1], this.material(i % 4 === 0 ? '#38565a' : '#293944', 0.4, 0.15));
+      this.addBox(this.scene, 'FCU pushbutton', [-2.7 + i * 0.385, 1.78, 2.03], [0.24, 0.09, 0.1], this.material(i % 4 === 0 ? '#38565a' : '#293944', 0.4, 0.15));
     }
 
     // Center pedestal with two throttle levers and surrounding controls.
@@ -163,7 +163,7 @@ export class CockpitScene {
     overhead.rotation.x = -0.25;
     this.scene.add(overhead);
     this.addBox(overhead, 'overhead housing', [0, 0, 0], [5.9, 0.25, 2.0], shell);
-    this.addBox(overhead, 'overhead face', [0, -0.15, 0.05], [5.55, 0.08, 1.7], dark);
+    this.addBox(overhead, 'overhead face', [0, 0.15, 0.05], [5.55, 0.08, 1.7], dark);
     for (let row = 0; row < 4; row++) {
       for (let col = 0; col < 9; col++) {
         const x = -2.36 + col * 0.59;
@@ -174,7 +174,7 @@ export class CockpitScene {
       }
     }
     const overheadTitle = this.makeTextSprite('OVERHEAD PANEL', '#a8dfe3');
-    overheadTitle.position.set(0, -0.08, -0.86);
+    overheadTitle.position.set(0, 0.31, -0.86);
     overheadTitle.scale.set(1.5, 0.22, 1);
     overhead.add(overheadTitle);
 
@@ -200,7 +200,7 @@ export class CockpitScene {
 
   addDisplay(x, y, label, subtitle) {
     const frame = this.material('#242f37', 0.34, 0.58);
-    this.addBox(this.scene, label + ' display frame', [x, y, 2.17], [1.48, 1.04, 0.18], frame);
+    this.addBox(this.scene, label + ' display frame', [x, y, 2.77], [1.48, 1.04, 0.18], frame);
     const canvas = document.createElement('canvas');
     canvas.width = 512; canvas.height = 320;
     const ctx = canvas.getContext('2d');
@@ -216,7 +216,7 @@ export class CockpitScene {
     const texture = new THREE.CanvasTexture(canvas);
     texture.colorSpace = THREE.SRGBColorSpace;
     const screen = new THREE.Mesh(new THREE.PlaneGeometry(1.34, 0.87), new THREE.MeshBasicMaterial({ map: texture }));
-    screen.position.set(x, y, 2.065);
+    screen.position.set(x, y, 2.88);
     this.scene.add(screen);
   }
 
@@ -239,7 +239,7 @@ export class CockpitScene {
     for (const item of this.items) {
       const group = new THREE.Group();
       const [x, y, z] = item.position || [0, 0, 2];
-      group.position.set(x, y, z + 0.18);
+      group.position.set(x, y, z + 0.62);
       group.userData.itemId = item.id;
       const ring = new THREE.Mesh(ringGeometry, new THREE.MeshBasicMaterial({ color: '#61d9df', transparent: true, opacity: 0.92 }));
       ring.userData.itemId = item.id;
