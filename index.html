@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080d14" />
+    <meta name="description" content="Verken de Airbus A320ceo cockpit in een interactieve 3D-leeromgeving. Ontdek instrumenten, bedieningspanelen en vliegtuigsystemen." />
+    <title>Flightdeck Academy — Airbus A320ceo</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+    <script type="importmap">
+      {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/"}}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="brand" href="#home" aria-label="Flightdeck Academy home">
+          <span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 19.2 13.2 29 17l-9.8 1.8L16 29l-3.2-10.2L3 17l9.8-3.8L16 3Z"/><path d="M16 9v14M9 16h14"/></svg></span>
+          <span class="brand-copy"><strong>FLIGHTDECK</strong><small>ACADEMY</small></span>
+        </a>
+        <div class="topbar-center"><span class="live-dot"></span><span>INTERACTIVE FLIGHT DECK</span><span class="topbar-divider"></span><span class="topbar-muted">LEARN · EXPLORE · UNDERSTAND</span></div>
+        <div class="topbar-actions">
+          <button class="top-icon-btn" id="helpButton" title="Help & bediening" aria-label="Help"><span>?</span></button>
+          <button class="profile-button" id="aboutButton"><span class="profile-avatar">FA</span><span>Over deze academy</span><span class="chevron">⌄</span></button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <aside class="sidebar">
+          <div class="sidebar-kicker">AIRCRAFT LIBRARY</div>
+          <button class="aircraft-select active" id="aircraftSelect">
+            <span class="aircraft-icon">A</span><span class="aircraft-copy"><strong>Airbus A320ceo</strong><small>CEO · CURRENT AIRCRAFT</small></span><span class="aircraft-chevron">⌄</span>
+          </button>
+          <div class="side-section-label">COCKPIT EXPLORER</div>
+          <nav class="side-nav" id="categoryNav" aria-label="Cockpit categorieën">
+            <button class="nav-item selected" data-category="all"><span class="nav-symbol">◫</span><span>Alle onderdelen</span><span class="nav-count" id="allCount">—</span></button>
+            <button class="nav-item" data-category="instruments"><span class="nav-symbol">▦</span><span>Instrumenten</span></button>
+            <button class="nav-item" data-category="autopilot"><span class="nav-symbol">⊞</span><span>Autopilot & FCU</span></button>
+            <button class="nav-item" data-category="overhead"><span class="nav-symbol">▤</span><span>Overhead panel</span></button>
+            <button class="nav-item" data-category="controls"><span class="nav-symbol">⌁</span><span>Flight controls</span></button>
+            <button class="nav-item" data-category="pedestal"><span class="nav-symbol">▥</span><span>Center pedestal</span></button>
+            <button class="nav-item" data-category="systems"><span class="nav-symbol">◈</span><span>Vliegtuigsystemen</span></button>
+            <button class="nav-item" data-category="communication"><span class="nav-symbol">⌁</span><span>Communicatie</span></button>
+          </nav>
+          <div class="sidebar-rule"></div>
+          <div class="side-section-label">LEARNING CENTER</div>
+          <button class="nav-item" id="tourNav"><span class="nav-symbol">▷</span><span>Guided cockpit tour</span><span class="nav-new">START</span></button>
+          <button class="nav-item" id="lessonsNav"><span class="nav-symbol">▧</span><span>Leerpaden</span></button>
+          <button class="nav-item" id="glossaryNav"><span class="nav-symbol">Aa</span><span>Begrippenlijst</span></button>
+          <div class="sidebar-bottom">
+            <div class="progress-card">
+              <div class="progress-head"><span>JOUW VOORTGANG</span><strong id="progressPercent">0%</strong></div>
+              <div class="progress-track"><span id="progressBar"></span></div>
+              <p id="progressText">Ontdek onderdelen om te beginnen.</p>
+            </div>
+            <div class="sidebar-foot"><span class="foot-status"></span> A320ceo MODULE <span class="foot-version">v0.1</span></div>
+          </div>
+        </aside>
+
+        <main class="main-content">
+          <div class="page-heading">
+            <div>
+              <div class="breadcrumbs"><span>ACADEMY</span><span>/</span><span>AIRBUS</span><span>/</span><strong>A320ceo</strong></div>
+              <h1>Flight deck <em>explorer</em></h1>
+              <p>Ontdek de cockpit. Klik op een onderdeel en leer hoe het werkt.</p>
+            </div>
+            <div class="heading-badges"><span class="edition-tag">CEO SERIES</span><span class="model-tag"><span class="model-dot"></span> 3D MODEL</span></div>
+          </div>
+
+          <section class="viewer-card" aria-label="Interactieve 3D cockpit">
+            <div class="viewer-topline"><div class="viewer-title"><span class="viewer-live"></span><span>3D COCKPIT ENVIRONMENT</span><span class="viewer-sep">/</span><span class="viewer-muted">AIRBUS A320ceo</span></div><div class="viewer-top-actions"><span class="view-chip" id="viewLabel">CAPTAIN VIEW</span><button class="viewer-icon" id="fullscreenButton" title="Volledig scherm">⛶</button></div></div>
+            <div class="viewer-stage" id="viewerStage">
+              <div class="stage-grid"></div>
+              <div class="loading-overlay" id="loadingOverlay"><div class="loader-ring"></div><span>3D FLIGHT DECK INITIALISEREN</span></div>
+              <div id="threeMount" class="three-mount"></div>
+              <div class="stage-caption"><span class="caption-cross">＋</span><span>DRAG TO ORBIT</span><span class="caption-separator">·</span><span>SCROLL TO ZOOM</span></div>
+              <div class="stage-left-tools"><button class="stage-tool active" id="hotspotToggle"><span class="tool-ring">◎</span><span>Hotspots</span><span class="toggle-indicator"></span></button><button class="stage-tool" id="labelsToggle"><span class="tool-ring">T</span><span>Labels</span><span class="toggle-indicator"></span></button></div>
+              <div class="stage-right-tools"><button class="stage-tool-square" id="resetCamera" title="Camera reset">↺</button><button class="stage-tool-square" id="zoomIn" title="Inzoomen">＋</button><button class="stage-tool-square" id="zoomOut" title="Uitzoomen">−</button></div>
+              <div class="view-switcher"><button class="view-preset active" data-view="captain">CAPTAIN</button><button class="view-preset" data-view="overhead">OVERHEAD</button><button class="view-preset" data-view="pedestal">PEDESTAL</button><button class="view-preset" data-view="wide">WIDE VIEW</button></div>
+              <div class="selected-indicator" id="selectedIndicator"><span class="selection-pulse"></span><span id="selectedIndicatorText">SELECT AN AIRCRAFT COMPONENT</span></div>
+            </div>
+            <div class="viewer-footer"><div class="footer-instruction"><span class="mouse-icon">⌖</span> Selecteer een hotspot of draai de cockpit om deze vanuit verschillende hoeken te bekijken.</div><div class="viewer-footer-right"><span class="footer-key">OrbitControls</span><span class="footer-key">WebGL</span><span class="footer-key">Three.js</span></div></div>
+          </section>
+
+          <section class="quick-stats" aria-label="Cockpit overzicht">
+            <div class="stat-card"><span class="stat-icon">◫</span><div><strong id="statComponents">—</strong><small>INTERACTIEVE ONDERDELEN</small></div></div>
+            <div class="stat-card"><span class="stat-icon">▤</span><div><strong>07</strong><small>COCKPIT ZONES</small></div></div>
+            <div class="stat-card"><span class="stat-icon">◎</span><div><strong>360°</strong><small>VRIJE CAMERABEDIENING</small></div></div>
+            <div class="stat-card"><span class="stat-icon">⌁</span><div><strong>03</strong><small>LEERLAGEN PER ONDERDEEL</small></div></div>
+          </section>
+
+          <section class="below-grid">
+            <div class="section-card explore-card">
+              <div class="section-head"><div><span class="eyebrow">START EXPLORING</span><h2>Populaire onderdelen</h2></div><button class="text-link" id="showAllItems">Bekijk alles <span>↗</span></button></div>
+              <div class="popular-grid" id="popularGrid"></div>
+            </div>
+            <div class="section-card learning-card">
+              <div class="section-head"><div><span class="eyebrow">LEARN STEP BY STEP</span><h2>Begin je rondleiding</h2></div><span class="lesson-icon">▷</span></div>
+              <p>Volg een korte introductie langs de belangrijkste onderdelen van de A320ceo-cockpit.</p>
+              <div class="lesson-meta"><span>⌁ 8 STAPPEN</span><span>◷ ± 10 MIN</span><span>BEGINNER</span></div>
+              <button class="primary-button" id="startTourButton">Start guided tour <span>→</span></button>
+            </div>
+          </section>
+          <footer class="disclaimer"><span class="disclaimer-icon">i</span><p><strong>Educatieve omgeving.</strong> Deze interactieve cockpit is bedoeld voor algemene kennis en zelfstudie. De weergave is schematisch en geen gecertificeerde simulator, checklist of operationele trainingsbron. Raadpleeg voor echte vluchtuitvoering altijd de actuele, goedgekeurde documentatie en bevoegde instructeurs.</p></footer>
+        </main>
+
+        <aside class="inspector" id="inspectorPanel">
+          <div class="inspector-header"><div><span class="eyebrow">COMPONENT INSPECTOR</span><h2 id="inspectorHeading">Cockpit guide</h2></div><button class="close-inspector" id="closeInspector" title="Sluit detailpaneel">×</button></div>
+          <div class="inspector-search"><span>⌕</span><input id="searchInput" type="search" placeholder="Zoek onderdeel of functie..." aria-label="Zoek een cockpitonderdeel"/><kbd>/</kbd></div>
+          <div class="inspector-content" id="inspectorContent">
+            <div class="welcome-visual"><div class="welcome-orbit orbit-one"></div><div class="welcome-orbit orbit-two"></div><div class="welcome-plane">✈</div><span class="welcome-cross cross-one">+</span><span class="welcome-cross cross-two">+</span></div>
+            <span class="eyebrow">WELCOME ABOARD</span>
+            <h3>Jouw cockpit, jouw leeromgeving.</h3>
+            <p>Selecteer een onderdeel in de 3D-cockpit of zoek hierboven naar een instrument, paneel of systeem.</p>
+            <div class="inspector-divider"></div>
+            <div class="mini-heading">SNEL NAAR</div>
+            <div class="quick-links" id="quickLinks"></div>
+            <div class="inspector-note"><span>✦</span><p><strong>Leertip</strong><br>Begin bij de PFD en ND. Deze schermen vormen een belangrijk deel van de informatie die de piloot tijdens de vlucht gebruikt.</p></div>
+          </div>
+          <div class="inspector-bottom"><span class="bottom-shield">◈</span><span>FLIGHTDECK ACADEMY</span><span class="bottom-build">BUILD 0.1.0</span></div>
+        </aside>
+      </div>
+      <div class="toast" id="toast" role="status"></div>
+      <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"><div class="modal" id="modalContent" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose">×</button><div id="modalBody"></div></div></div>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
