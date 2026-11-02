@@ -22,7 +22,8 @@ const make = (id, title, short, category, zone, summary, purpose, fn, howTo, whe
   howTo, when, position: p, view,
   note: 'Dit is algemene cockpitfamiliarisatie. De exacte configuratie en bediening kunnen per vliegtuig en operator verschillen. Gebruik voor operationele handelingen altijd de actuele, goedgekeurde documentatie en instructie.',
   related: []
-});
+  };
+};
 
 export const aircraftItems = [
   make('pfd-captain','Primary Flight Display','PFD','instruments','Main instrument panel','Het primaire vluchtdisplay voor de captain.','De PFD brengt de belangrijkste vluchtinformatie samen, zoals attitude, luchtsnelheid, hoogte, verticale snelheid en laterale/verticale geleiding.','De symbolen worden vanuit verschillende vliegtuig- en navigatiesystemen opgebouwd. De presentatie helpt de vlieger de vluchttoestand in één oogopslag te beoordelen.',['Herken de kunstmatige horizon in het midden.','Zoek de snelheidsband links en de hoogteschaal rechts.','Bekijk de verticale snelheidsindicatie en de geleidingsbalken.','Vergelijk informatie met de overige displays en de actuele vliegtuigstatus.'],'Tijdens vrijwel alle vluchtfasen is dit een van de belangrijkste informatiebronnen.',[-2.5,0.2,2.2]),
