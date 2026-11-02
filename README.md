@@ -1,14 +1,15 @@
 # Flightdeck Academy — Airbus A320ceo
 
-Een zelfstandige, uitbreidbare 3D-cockpit leeromgeving gebouwd met Vite en Three.js.
+Een uitbreidbare cockpit-familiarisatieomgeving met een interactieve, procedureel opgebouwde 3D-weergave. De eerste module is de Airbus A320ceo.
 
-## Wat zit erin?
+## Wat bevat deze versie?
 
-- Procedureel opgebouwde 3D-cockpit met vrije orbit-, zoom- en camerabediening.
-- Klikbare hotspots voor 24 A320ceo-cockpitonderdelen.
-- Uitleg per onderdeel: doel, functie, stapsgewijze herkenning, gebruikscontext en gerelateerde onderdelen.
-- Zoekfunctie, categorieën, guided tour, begrippenlijst en lokale leerprogressie.
-- Modulaire componentendatabase (`src/data/a320ceo.js`) zodat extra vliegtuigen later als aparte datasets kunnen worden toegevoegd.
+- Three.js-cockpit met orbit-, zoom- en camerastandpunten voor captain, overhead, pedestal en wide view.
+- 27 selecteerbare cockpitonderdelen en hotspots.
+- Per onderdeel uitleg over doel, functie, herkenning, context en gerelateerde onderdelen.
+- Zoeken, categorieën, populaire onderdelen, begrippenlijst en een rondleiding van acht stappen.
+- Leerprogressie die lokaal in de browser wordt bewaard.
+- Een vliegtuigregister als basis voor toekomstige Airbus- en Boeing-modules.
 - Responsive interface voor desktop, tablet en mobiel.
 
 ## Lokaal starten
@@ -22,41 +23,45 @@ npm run dev
 
 Open daarna de URL die Vite toont (standaard `http://localhost:5173`).
 
-Voor een eenvoudige statische preview zonder Vite (Three.js wordt dan via de CDN geladen): `python -m http.server 8000` en open `http://localhost:8000`.
-
-## Productieb build
+Voor een productiebuild:
 
 ```bash
 npm run build
 npm run preview
 ```
 
-De productieversie wordt in `dist/` geplaatst.
+De productieversie komt in `dist/`.
 
 ## Projectstructuur
 
 ```text
+index.html
 src/
+  main.js                  # Interface, zoeken, navigatie en leerlogica
+  styles.css               # Volledige responsive vormgeving
   data/
-    a320ceo.js       # A320ceo-onderdelen, uitleg, hotspots en tourstappen
-    aircraftRegistry.js # catalogus voor huidige en toekomstige vliegtuigtypes
+    a320ceo.js             # A320ceo-onderdelen, uitleg, categorieën en tour
+    aircraftRegistry.js    # Catalogus van huidige en geplande vliegtuigtypes
   scene/
-    cockpit.js       # Three.js-scène en procedurele 3D-cockpit
-  main.js            # interface, zoekfunctie, navigatie en leerlogica
-  styles.css         # volledige interface en responsive layout
+    cockpit.js             # Three.js-scène en procedurele cockpitgeometrie
+.github/
+  workflows/
+    deploy-pages.yml       # Automatische GitHub Pages build en deployment
 ```
 
 ## Een nieuw vliegtuig toevoegen
 
-1. Voeg een nieuwe dataset toe in `src/data/`, bijvoorbeeld `a320neo.js` of `b737-800.js`.
-2. Gebruik voor elk onderdeel dezelfde velden als in `a320ceo.js`: `id`, `title`, `short`, `category`, `zone`, `summary`, `purpose`, `function`, `howTo`, `when`, `note`, `related`, `position`, `hotspot` en `view`.
-3. Voeg voor het vliegtuig een eigen 3D-bouwfunctie of model-loader toe. Houd de interface- en datalaag gescheiden van de 3D-scène.
-4. Voeg het vliegtuig toe aan de aircraft registry wanneer er meerdere types actief worden.
+1. Maak een eigen datamodule in `src/data/`, bijvoorbeeld `a320neo.js` of `b737-800.js`.
+2. Gebruik dezelfde componentvelden als in `a320ceo.js`: `id`, `title`, `short`, `category`, `zone`, `summary`, `purpose`, `function`, `howTo`, `when`, `position` en `view`.
+3. Maak een bijbehorende scene of modeladapter in `src/scene/`.
+4. Registreer het type in `aircraftRegistry.js` en activeer het pas nadat de eigen data en cockpit klaar zijn.
 
-## Belangrijke beperking van deze eerste versie
+## Publiceren op GitHub Pages
 
-Het 3D-model is procedureel opgebouwd uit eigen Three.js-geometrie. Het is een interactieve educatieve visualisatie en geen exacte fabrikant-CAD-replica, gecertificeerde simulator of bron voor operationele procedures. Voor de volgende realismefase is een zorgvuldig gecontroleerd, gelicenseerd A320ceo 3D-model nodig, plus een complete geometrische plaatsing van alle bedieningsorganen.
+De workflow in `.github/workflows/deploy-pages.yml` bouwt en publiceert de website automatisch bij iedere push naar `main`.
 
-## GitHub Pages
+Ga in GitHub naar **Settings → Pages → Build and deployment** en kies **GitHub Actions** als source. Bekijk daarna het tabblad **Actions** om de eerste build en deployment te volgen.
 
-Inbegrepen is een GitHub Actions-workflow in `.github/workflows/deploy-pages.yml`. Push de repository naar de `main`-branch en stel in GitHub bij **Settings → Pages → Build and deployment** de source in op **GitHub Actions**. Daarna bouwt en publiceert de workflow de `dist/`-map automatisch.
+## Grenzen van deze versie
+
+De cockpit is procedureel opgebouwd uit eigen Three.js-geometrie. Het is een interactieve educatieve visualisatie, geen exacte fabrikant-CAD-replica, gecertificeerde simulator of bron voor operationele procedures. De indeling en systeemweergaven kunnen per toestelconfiguratie en operator verschillen. Voor echte vluchtuitvoering zijn actuele, goedgekeurde vliegtuigdocumentatie en bevoegde instructeurs leidend.
