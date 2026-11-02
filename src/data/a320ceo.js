@@ -58,6 +58,17 @@ export const views = [
     licence: 'Public domain',
     licenceUrl: 'https://commons.wikimedia.org/wiki/File:CP_MCDU.jpg',
     note: 'Detailopname van een A320-200 MCDU. De precieze pagina-indeling en beschikbare functies hangen af van de geïnstalleerde software en vliegtuigconfiguratie.'
+  },
+  {
+    id: 'circuit',
+    title: 'Circuit breaker panel',
+    subtitle: 'Push-pull circuit breakers voor elektrische en systeemcircuits',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/A320_CB_Panel.jpg',
+    source: 'https://commons.wikimedia.org/wiki/File:A320_CB_Panel.jpg',
+    author: 'Dreznicek009',
+    licence: 'CC BY-SA 4.0',
+    licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    note: 'Close-up van een A320 circuit-breaker panel. De individuele breakers zijn aangeduid met rij- en positienummer; gebruik de geprinte circuitlabels naast elke breaker om de exacte systeemnaam te herkennen.'
   }
 ];
 
@@ -318,6 +329,37 @@ function add(id, title, view, x, y, description, purpose, context, group = '') {
   ['oh-cvr-erase','CVR erase guarded control',18,67,'CVR erase guarded control.','Beschermde erase-functie voor de cockpit voice recorder.','Dit is een beveiligde functie en geen knop om in de praktijk uit te proberen.']
 ].forEach(([id,title,x,y,description,purpose,context]) => add(id,title,'overhead',x,y,description,purpose,context));
 
+
+/* ───────────────────────── CIRCUIT BREAKER PANEL ─────────────────────────
+   Each dot identifies an individual breaker position visible in the photo.
+   The printed circuit labels beside the breaker define the exact circuit.
+*/
+const breakerRows = [
+  ['Flight controls / fuel', 'Flight-control and fuel-system breaker row'],
+  ['Hydraulic / engine', 'Hydraulic and engine-system breaker row'],
+  ['Electrical distribution', 'Electrical distribution breaker row'],
+  ['Air conditioning / pressurization', 'Air-conditioning and pressurization breaker row'],
+  ['Navigation / avionics', 'Navigation and avionics breaker row'],
+  ['Cabin / lighting / utility', 'Cabin, lighting and utility breaker row']
+];
+breakerRows.forEach(([rowName, rowDescription], rowIndex) => {
+  for (let column = 0; column < 15; column += 1) {
+    const number = String(column + 1).padStart(2, '0');
+    const id = `cb-row-${rowIndex + 1}-${number}`;
+    add(
+      id,
+      `${rowName} breaker ${number}`,
+      'circuit',
+      8 + column * 6,
+      22 + rowIndex * 13.5,
+      `Dit is circuit breaker ${number} in de rij ${rowIndex + 1} voor ${rowName.toLowerCase()}. Het circuitlabel direct naast de breaker noemt de exacte elektrische belasting of functie.`,
+      'Een circuit breaker beschermt een elektrisch circuit tegen een te hoge stroom en kan het betreffende circuit onderbreken wanneer de beveiliging aanspreekt.',
+      'Circuit breakers zijn vooral van belang voor systeembeveiliging en onderhoud. Niet resetten, indrukken of uittrekken zonder de juiste goedgekeurde procedure en bevoegdheid.',
+      'Circuit breaker panel'
+    );
+  }
+});
+
 export const tutorial = [
   { view: 'overview', item: 'ov-fcu', title: 'Welkom op de flight deck', body: 'Je begint met het volledige cockpitoverzicht. De cockpit bestaat uit een main instrument panel, overhead panel, zijconsoles en de center pedestal. Gebruik de tabbladen om tussen de echte detailfoto’s te wisselen.' },
   { view: 'main', item: 'pfd-cap', title: 'Begin bij de PFD', body: 'Het Primary Flight Display toont de belangrijkste vluchttoestand. Je herkent onder meer de kunstmatige horizon, snelheidsband, hoogteschaal en flight-guidance-aanduidingen.' },
@@ -329,6 +371,7 @@ export const tutorial = [
   { view: 'pedestal', item: 'ped-thrust1', title: 'De center pedestal', body: 'Hier vind je thrust levers, speed brake, flaps, MCDU’s en radio-/audio-bediening. Open de close-up om de fysieke onderdelen afzonderlijk te bekijken.' },
   { view: 'mcdu', item: 'mcdu-display', title: 'De MCDU leren lezen', body: 'Het MCDU-scherm toont de actieve pagina. De line-select keys aan weerszijden zijn contextgevoelig: hun functie volgt uit de tekst op dezelfde regel.' },
   { view: 'mcdu', item: 'mcdu-clr', title: 'Het toetsenbord', body: 'De MCDU heeft aparte functietoetsen, line-select keys en een alfanumeriek toetsenbord. Elke gemarkeerde toets heeft een eigen uitleg in deze atlas.' },
+  { view: 'circuit', item: 'cb-row-1-01', title: 'Circuit breakers', body: 'Dit paneel bevat elektrische circuit breakers. Ze beschermen afzonderlijke circuits. De kleine geprinte labels benoemen het circuit; de markeringen gebruiken daarom rij- en positienummers. Circuit breakers zijn geen normale bedieningsknoppen en mogen niet zonder goedgekeurde onderhoudsprocedure worden gereset.' },
   { view: 'overview', item: 'ov-pedestal', title: 'Zelf verder ontdekken', body: 'Je hebt nu de hoofdgebieden gezien. Gebruik de zoekfunctie of de volledige onderdelenlijst om de overige gemarkeerde bedieningselementen te verkennen.' }
 ];
 
