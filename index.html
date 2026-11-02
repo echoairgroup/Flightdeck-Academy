@@ -3,87 +3,162 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f4f1">
-  <meta name="description" content="Leer de cockpit van de Airbus A320ceo kennen met een foto, aanklikbare onderdelen en duidelijke uitleg.">
-  <title>Flightdeck Academy | Airbus A320ceo</title>
+  <meta name="theme-color" content="#f5f5f2">
+  <meta name="description" content="Interactieve foto-atlas van de Airbus A320ceo cockpit. Zoom in, selecteer bedieningselementen en volg de cockpit tutorial.">
+  <title>Flightdeck Academy — A320ceo cockpitatlas</title>
   <link rel="stylesheet" href="./src/styles.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="site-name" href="./">Flightdeck Academy</a>
-    <nav class="main-nav" aria-label="Hoofdnavigatie">
-      <a class="active" href="#cockpit">A320ceo cockpit</a>
-      <a href="#onderdelen">Onderdelen</a>
-    </nav>
+    <div class="header-inner">
+      <a class="brand" href="./"><span class="brand-mark">FA</span><span>Flightdeck Academy</span></a>
+      <nav class="header-nav" aria-label="Hoofdnavigatie">
+        <a href="#cockpit" class="active">Cockpit atlas</a>
+        <a href="#onderdelen">Onderdelenlijst</a>
+        <a href="#bronnen">Fotobronnen</a>
+      </nav>
+      <button class="tutorial-start" id="startTutorial">Start cockpit tutorial</button>
+    </div>
   </header>
 
   <main class="page">
     <section class="intro">
-      <p class="kicker">AIRBUS A320 FAMILIARISATIE</p>
-      <h1>De Airbus A320ceo cockpit</h1>
-      <p class="intro-text">Klik op een genummerd punt op de foto om te ontdekken wat je voor je ziet en waarvoor het onderdeel dient.</p>
+      <div>
+        <p class="eyebrow">AIRBUS A320ceo · FOTO-ATLAS</p>
+        <h1>Leer de volledige cockpit kennen</h1>
+        <p class="intro-copy">Bekijk echte cockpitfoto's, zoom in op de details en selecteer de gemarkeerde knoppen en schakelaars voor uitleg.</p>
+      </div>
+      <div class="model-label">
+        <strong>A320-200 / ceo</strong>
+        <span>PHOTO REFERENCE · EDUCATIONAL</span>
+      </div>
     </section>
 
-    <section class="cockpit-layout" id="cockpit">
-      <div class="photo-column">
-        <div class="photo-heading">
-          <div>
-            <h2>Cockpitoverzicht</h2>
-            <p>Airbus A320-214 · flight deck</p>
-          </div>
-          <a class="photo-open" href="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbus_A320-214_Vueling_EC-HHA_cockpit_%285508849819%29.jpg" target="_blank" rel="noopener">Open grote foto ↗</a>
+    <section class="atlas" id="cockpit">
+      <div class="atlas-header">
+        <div>
+          <h2>Cockpitpanelen</h2>
+          <p>Kies een paneel om de bijbehorende foto op volledige grootte te bekijken.</p>
         </div>
-
-        <div class="photo-frame">
-          <div class="photo-area" id="photoArea">
-            <img
-              class="cockpit-photo"
-              src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbus_A320-214_Vueling_EC-HHA_cockpit_%285508849819%29.jpg"
-              alt="Foto van de cockpit van een Airbus A320-214, met instrumentenpaneel en center pedestal"
-              width="1000"
-              height="683"
-              fetchpriority="high"
-            >
-            <div class="photo-hotspots" id="photoHotspots" aria-label="Klikbare onderdelen op de cockpitfoto"></div>
-          </div>
-          <div class="photo-legend"><span class="legend-dot"></span> Klik op een nummer voor uitleg</div>
-        </div>
-        <p class="photo-caption">De markeringen verwijzen naar onderdelen die op deze foto zichtbaar zijn. Niet ieder cockpitonderdeel staat op deze opname in beeld.</p>
+        <div class="atlas-summary"><strong id="controlTotal">—</strong><span>uitlegbare onderdelen</span></div>
       </div>
 
-      <aside class="detail-panel" id="detailPanel" aria-live="polite">
-        <p class="kicker">ONDERDEEL UITLEG</p>
-        <div class="empty-detail">
-          <span class="empty-number">01</span>
-          <h2>Kies een onderdeel</h2>
-          <p>Klik op een nummer in de foto of kies hieronder een onderdeel uit de lijst. De uitleg verschijnt hier.</p>
+      <div class="view-tabs" id="viewTabs" role="tablist" aria-label="Cockpitfoto's">
+        <button class="view-tab active" data-view="overview" role="tab">1. Cockpitoverzicht</button>
+        <button class="view-tab" data-view="main" role="tab">2. Instrumentenpaneel</button>
+        <button class="view-tab" data-view="overhead" role="tab">3. Overhead panel</button>
+        <button class="view-tab" data-view="pedestal" role="tab">4. Center pedestal</button>
+        <button class="view-tab" data-view="mcdu" role="tab">5. MCDU</button>
+      </div>
+
+      <div class="atlas-grid">
+        <div class="photo-column">
+          <div class="photo-title-row">
+            <div>
+              <h3 id="viewTitle">Cockpitoverzicht</h3>
+              <p id="viewSubtitle">De complete flight deck vanaf de instapzijde</p>
+            </div>
+            <div class="photo-actions">
+              <button class="small-button" id="toggleMarkers" type="button">Markeringen verbergen</button>
+              <a class="small-button link-button" id="openOriginal" href="#" target="_blank" rel="noopener">Open originele foto ↗</a>
+            </div>
+          </div>
+
+          <div class="photo-stage" id="photoStage">
+            <div class="photo-canvas" id="photoCanvas">
+              <img id="panelPhoto" class="panel-photo" src="" alt="" draggable="false">
+              <div id="hotspots" class="hotspots" aria-label="Klikbare bedieningselementen"></div>
+            </div>
+            <div class="photo-loading" id="photoLoading">Foto laden…</div>
+            <div class="zoom-controls" aria-label="Zoom bediening">
+              <button type="button" id="zoomOut" aria-label="Uitzoomen">−</button>
+              <span id="zoomLabel">100%</span>
+              <button type="button" id="zoomIn" aria-label="Inzoomen">+</button>
+              <button type="button" id="zoomReset">Reset</button>
+            </div>
+            <div class="photo-hint">Sleep om te verplaatsen · Scroll of gebruik + / − om in te zoomen</div>
+          </div>
+
+          <div class="photo-meta">
+            <span id="photoNote"></span>
+            <span id="markerCount"></span>
+          </div>
+          <div class="photo-credit-line" id="photoCredit"></div>
         </div>
-      </aside>
+
+        <aside class="detail-panel" id="detailPanel" aria-live="polite">
+          <div class="detail-empty">
+            <p class="eyebrow">ONDERDEEL UITLEG</p>
+            <span class="empty-symbol">A320</span>
+            <h2>Klik op een gemarkeerd onderdeel</h2>
+            <p>Elk genummerd punt hoort bij een specifiek bedieningselement in de geselecteerde foto. Je kunt ook een onderdeel opzoeken in de volledige catalogus.</p>
+          </div>
+        </aside>
+      </div>
     </section>
 
     <section class="directory" id="onderdelen">
       <div class="directory-heading">
         <div>
-          <p class="kicker">A320ceo REFERENTIE</p>
-          <h2>Onderdelen van de cockpit</h2>
-          <p class="directory-intro">Zoek een instrument, paneel of vliegtuig­systeem.</p>
+          <p class="eyebrow">COMPONENTENREGISTER</p>
+          <h2>Alle gemarkeerde bedieningselementen</h2>
+          <p>Zoek op naam of blader per paneel. Selecteer een resultaat om direct naar de juiste foto te gaan.</p>
         </div>
-        <label class="search-box">
+        <label class="search-field">
           <span>Zoeken</span>
-          <input id="searchInput" type="search" placeholder="Bijv. PFD, FCU, hydraulica..." autocomplete="off">
+          <input type="search" id="searchInput" placeholder="Bijv. BAT 1, PFD, flap lever…" autocomplete="off">
         </label>
       </div>
-      <div class="filters" id="categoryFilters" aria-label="Filter op categorie"></div>
-      <p class="result-count" id="resultCount"></p>
+      <div class="directory-toolbar">
+        <div class="filters" id="directoryFilters"></div>
+        <span class="result-count" id="resultCount"></span>
+      </div>
       <div class="component-list" id="componentList"></div>
+    </section>
+
+    <section class="tutorial-block">
+      <div>
+        <p class="eyebrow">BEGELEIDE RONDLEIDING</p>
+        <h2>Begin met de cockpit tutorial</h2>
+        <p>Een introductie langs de vijf fotopanelen. Je leert waar de belangrijkste onderdelen zitten en hoe de cockpit is ingedeeld.</p>
+      </div>
+      <button class="tutorial-start large" id="startTutorialBottom">Begin de rondleiding →</button>
+    </section>
+
+    <section class="sources" id="bronnen">
+      <h2>Fotoverantwoording</h2>
+      <p>De foto's zijn afkomstig van Wikimedia Commons. Iedere foto is gekoppeld aan de oorspronkelijke bron en licentie. De markeringen en uitleg zijn door Flightdeck Academy toegevoegd.</p>
+      <div class="source-list" id="sourceList"></div>
+    </section>
+
+    <section class="disclaimer">
+      <strong>Educatieve waarschuwing</strong>
+      <p>Dit is een foto-atlas voor algemene cockpitfamiliarisatie. A320-toestellen kunnen verschillen door serienummer, avionica-standaard, modificaties en operatoropties. Niet elke knop heeft op ieder toestel dezelfde uitvoering. Deze website is geen gecertificeerde simulator, checklist of operationele handleiding. Gebruik voor echte vluchtuitvoering altijd actuele, goedgekeurde Airbus-documentatie en bevoegde instructeurs.</p>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>Flightdeck Academy · Airbus A320ceo</p>
-    <p>Educatief bedoeld. Deze website is geen gecertificeerde simulator en vervangt geen officiële Airbus-documentatie of opleiding.</p>
-    <p class="photo-credit">Cockpitfoto: Curimedia, <a href="https://commons.wikimedia.org/wiki/File:Airbus_A320-214_Vueling_EC-HHA_cockpit_(5508849819).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">CC BY 2.0</a>.</p>
+    <span>Flightdeck Academy</span>
+    <span>Airbus A320ceo photo atlas · Educational project</span>
   </footer>
+
+  <div class="tutorial-overlay" id="tutorialOverlay" hidden>
+    <div class="tutorial-window" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle">
+      <div class="tutorial-top">
+        <span id="tutorialStep">STAP 1 / 11</span>
+        <button type="button" id="closeTutorial" aria-label="Tutorial sluiten">×</button>
+      </div>
+      <div class="tutorial-progress"><span id="tutorialProgress"></span></div>
+      <p class="eyebrow">A320ceo COCKPIT TOUR</p>
+      <h2 id="tutorialTitle">Welkom op de flight deck</h2>
+      <p id="tutorialBody"></p>
+      <div class="tutorial-selected" id="tutorialSelected"></div>
+      <div class="tutorial-actions">
+        <button type="button" class="small-button" id="tutorialBack">← Vorige</button>
+        <button type="button" class="tutorial-start" id="tutorialNext">Volgende stap →</button>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="./src/main.js"></script>
 </body>
