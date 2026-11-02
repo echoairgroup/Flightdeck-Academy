@@ -239,7 +239,7 @@ export class CockpitScene {
     for (const item of this.items) {
       const group = new THREE.Group();
       const [x, y, z] = item.position || [0, 0, 2];
-      group.position.set(x, y, z + 0.62);
+      group.position.set(x, y, z + 0.12);
       group.userData.itemId = item.id;
       const ring = new THREE.Mesh(ringGeometry, new THREE.MeshBasicMaterial({ color: '#61d9df', transparent: true, opacity: 0.92 }));
       ring.userData.itemId = item.id;
