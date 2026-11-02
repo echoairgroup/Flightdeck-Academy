@@ -108,7 +108,6 @@ function setView(viewId) {
   $('#photoLoading').textContent = 'Foto laden…';
   $('#photoLoading').hidden = false;
   photo.alt = `${view.title} — foto van een Airbus A320-family cockpitpaneel. Klik op de genummerde punten voor uitleg.`;
-  photo.src = view.src;
 
   photo.onload = () => {
     stage.style.aspectRatio = `${photo.naturalWidth} / ${photo.naturalHeight}`;
@@ -120,6 +119,7 @@ function setView(viewId) {
     $('#photoLoading').classList.add('error');
     $('#photoLoading').innerHTML = `De foto kon niet worden geladen. <a href="${escapeHTML(view.src)}" target="_blank" rel="noopener">Open de foto rechtstreeks</a>.`;
   };
+  photo.src = view.src;
 
   renderHotspots();
   renderDetail(null);
