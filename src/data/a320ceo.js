@@ -8,9 +8,18 @@ export const categories = [
   { id: 'communication', label: 'Communicatie', icon: '⌁' }
 ];
 
-const make = (id, title, short, category, zone, summary, purpose, fn, howTo, when, position, view = 'captain') => ({
+const make = (id, title, short, category, zone, summary, purpose, fn, howTo, when, position, view = 'captain') => {
+  const p = [...position];
+  if (category === 'instruments') p[2] = 3.0;
+  if (category === 'autopilot') { p[1] = 1.88; p[2] = 2.05; }
+  if (category === 'overhead') { p[1] = 3.92; p[2] = Math.max(-0.72, Math.min(0.72, p[2])); }
+  if (category === 'pedestal' || category === 'communication') { p[1] = -0.25; p[2] = 1.0; }
+  if (category === 'controls' && id.startsWith('sidestick')) { p[1] = -0.15; p[2] = 1.95; }
+  if (category === 'controls' && id === 'rudder-pedals') { p[1] = -1.42; p[2] = 1.95; }
+  if (category === 'systems' && id === 'landing-gear') p[2] = 3.0;
+  return {
   id, title, short, category, zone, summary, purpose, function: fn,
-  howTo, when, position, view,
+  howTo, when, position: p, view,
   note: 'Dit is algemene cockpitfamiliarisatie. De exacte configuratie en bediening kunnen per vliegtuig en operator verschillen. Gebruik voor operationele handelingen altijd de actuele, goedgekeurde documentatie en instructie.',
   related: []
 });
