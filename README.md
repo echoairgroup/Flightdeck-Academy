@@ -36,6 +36,7 @@ De productieversie komt in `dist/`.
 
 ```text
 index.html
+.nojekyll
 src/
   main.js                  # Interface, zoeken, navigatie en leerlogica
   styles.css               # Volledige responsive vormgeving
@@ -44,9 +45,6 @@ src/
     aircraftRegistry.js    # Catalogus van huidige en geplande vliegtuigtypes
   scene/
     cockpit.js             # Three.js-scène en procedurele cockpitgeometrie
-.github/
-  workflows/
-    deploy-pages.yml       # Automatische GitHub Pages build en deployment
 ```
 
 ## Een nieuw vliegtuig toevoegen
@@ -58,9 +56,14 @@ src/
 
 ## Publiceren op GitHub Pages
 
-De workflow in `.github/workflows/deploy-pages.yml` bouwt en publiceert de website automatisch bij iedere push naar `main`.
+Deze repository is geschikt voor rechtstreekse statische publicatie. In GitHub:
 
-Ga in GitHub naar **Settings → Pages → Build and deployment** en kies **GitHub Actions** als source. Bekijk daarna het tabblad **Actions** om de eerste build en deployment te volgen.
+1. Open **Settings → Pages**.
+2. Kies bij **Build and deployment** voor **Deploy from a branch**.
+3. Selecteer branch **main** en map **/(root)**.
+4. Sla de instelling op.
+
+De website gebruikt de Three.js-module via de import map in `index.html`; voor de statische Pages-versie is dus geen aparte Vite-buildactie nodig. De `.nojekyll`-file zorgt ervoor dat de bronmappen rechtstreeks worden meegenomen.
 
 ## Grenzen van deze versie
 
