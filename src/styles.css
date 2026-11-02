@@ -222,7 +222,7 @@ a { color: inherit; }
 .photo-stage {
   position: relative;
   width: 100%;
-  min-height: 300px;
+  min-height: 0;
   aspect-ratio: 1.5;
   overflow: hidden;
   background: #1f2529;
@@ -586,7 +586,6 @@ a { color: inherit; }
   .detail-panel { min-height: auto; }
   .photo-title-row { flex-direction: column; align-items: flex-start; gap: 10px; }
   .photo-actions { justify-content: flex-start; }
-  .photo-stage { min-height: 250px; }
   .directory-heading { flex-direction: column; align-items: stretch; }
   .search-field { width: 100%; }
   .directory-toolbar { align-items: flex-start; flex-direction: column; }
