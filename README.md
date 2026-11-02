@@ -1,41 +1,49 @@
-# Flightdeck Academy — Airbus A320ceo
+# Flightdeck Academy — Airbus A320ceo cockpit atlas
 
-Een eenvoudige cockpit-leeromgeving. De A320ceo wordt getoond met een echte cockpitfoto met aanklikbare markeringen. Een klik opent uitleg over het betreffende instrument of systeem.
+An educational A320ceo photo atlas. The site uses real cockpit photographs rather than a procedural 3D model. Select the photo tabs, zoom into each panel, and click numbered markers to read about individual controls.
 
-## In deze versie
+## What is included
 
-- Een echte foto van een Airbus A320-214 cockpit.
-- Klikbare markeringen op onderdelen die op de foto zichtbaar zijn.
-- Uitleg bij 27 A320ceo cockpitonderdelen.
-- Zoeken en filteren op categorie.
-- Eenvoudige layout die ook op mobiel werkt.
+- Five photo views: full cockpit overview, main instrument panel, overhead panel, center pedestal, and MCDU close-up.
+- Individual clickable markers for visible controls and key groups: FCU selectors, PFD/ND/ECAM displays, overhead system switches, pedestal controls, and MCDU keys.
+- Zoom from 100% to 500%, mouse-wheel zoom, drag-to-pan, reset and focus-on-selected-control.
+- Component catalogue with search across all photo views.
+- Guided eleven-step cockpit tour.
+- Local learning progress stored in the browser.
+- Responsive layout for desktop, tablet and mobile.
 
-## Lokaal starten
+## Local development
 
-Node.js 20.19+ of 22.12+ is aanbevolen.
+Requires Node.js 20.19+ or 22.12+.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Voor een productiebuild:
+Production build:
 
 ```bash
 npm run build
+npm run preview
 ```
 
 ## GitHub Pages
 
-De website is statisch en gebruikt relatieve paden. Stel GitHub Pages in op **Deploy from a branch**, branch **main** en map **/(root)**.
+The repository is a Vite static site. GitHub Pages should use **GitHub Actions** with a build of the `dist/` directory, or the existing Pages branch configuration if maintained separately. The CI workflow in `.github/workflows/ci.yml` runs `npm install` and `npm run build` on every push to `main`.
 
-## Foto en licentie
+## Photo sources and licences
 
-De cockpitfoto toont Airbus A320-214 Vueling EC-HHA. Foto door Curimedia, via Wikimedia Commons, beschikbaar onder Creative Commons Attribution 2.0 (CC BY 2.0). De naamsvermelding en licentielink staan op de website.
+- Cockpit overview — Curimedia, Wikimedia Commons, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/): https://commons.wikimedia.org/wiki/File:Airbus_A320-214_Vueling_EC-HHA_cockpit_(5508849819).jpg
+- Main panel — Curimedia, Wikimedia Commons, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/): https://commons.wikimedia.org/wiki/File:Main_panel_taxi_with_one-engine_(5669062307).jpg
+- Overhead panel — Olivier Cleynen, Wikimedia Commons, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/): https://commons.wikimedia.org/wiki/File:Overhead_panel_of_an_Airbus_A320_during_cruise.jpg
+- Center pedestal — Olivier Cleynen, Wikimedia Commons, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/): https://commons.wikimedia.org/wiki/File:Thrust_levers_of_an_Airbus_A320.jpg
+- MCDU — Christoph Paulus, Wikimedia Commons, public domain: https://commons.wikimedia.org/wiki/File:CP_MCDU.jpg
 
-- Foto: https://commons.wikimedia.org/wiki/File:Airbus_A320-214_Vueling_EC-HHA_cockpit_(5508849819).jpg
-- Licentie: https://creativecommons.org/licenses/by/2.0/
+Attribution is also displayed below each photo on the website.
 
-## Let op
+## Important limitations
 
-De website is bedoeld voor algemene educatie en herkenning. Het is geen gecertificeerde simulator of operationele handleiding. Volg voor echte vluchtuitvoering altijd de actuele, goedgekeurde documentatie en bevoegde instructeurs.
+The images are representative A320-family references, not all from the same aircraft registration or operator. A320ceo panels vary with aircraft serial number, modification status, avionics standard and airline options. Markers identify visible controls in these selected reference photographs; they do not claim to cover every possible installed option, hidden circuit breaker or every variant. A marker may describe a named button or switch visible in the photograph; where a photo does not show an item clearly, the catalogue explains the system without implying a precise physical location.
+
+This is an educational familiarisation resource, not a certified simulator, checklist or source for operating procedures. For flight operations, use current approved aircraft documentation and qualified instruction.
