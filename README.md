@@ -1,27 +1,27 @@
 # Flightdeck Academy — Airbus A320ceo cockpit atlas
 
-An educational A320ceo photo atlas. The site uses real cockpit photographs rather than a procedural 3D model. Select the photo tabs, zoom into each panel, and click numbered markers to read about individual controls.
+Een foto-atlas voor cockpitfamiliarisatie. De website gebruikt echte cockpitfoto's in plaats van een nagebouwd 3D-model. Kies een paneel, zoom in tot 500%, sleep de foto en klik op de afzonderlijke markeringen voor uitleg.
 
-## What is included
+## Inhoud
 
-- Five photo views: full cockpit overview, main instrument panel, overhead panel, center pedestal, and MCDU close-up.
-- Individual clickable markers for visible controls and key groups: FCU selectors, PFD/ND/ECAM displays, overhead system switches, pedestal controls, and MCDU keys.
-- Zoom from 100% to 500%, mouse-wheel zoom, drag-to-pan, reset and focus-on-selected-control.
-- Component catalogue with search across all photo views.
-- Guided eleven-step cockpit tour.
-- Local learning progress stored in the browser.
-- Responsive layout for desktop, tablet and mobile.
+- Zes fotopanelen: compleet cockpitoverzicht, main instrument panel, overhead panel, center pedestal, MCDU-close-up en circuit-breaker panel.
+- 304 individueel selecteerbare markeringen: onder meer displays, FCU-selectors, overheadbediening, thrust levers, pedestal-bediening, MCDU-functietoetsen en de breaker-posities.
+- Zoom met muiswiel of knoppen, sleep om te verschuiven, reset en zoom direct naar geselecteerde onderdelen.
+- Doorzoekbaar onderdelenregister met filters per paneel.
+- Begeleide tutorial met 12 stappen.
+- Lokale leerstatus in de browser.
+- Werkt op desktop, tablet en mobiel.
 
-## Local development
+## Lokaal starten
 
-Requires Node.js 20.19+ or 22.12+.
+Vereist Node.js 20.19+ of 22.12+.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Production build:
+Productiebuild:
 
 ```bash
 npm run build
@@ -30,20 +30,23 @@ npm run preview
 
 ## GitHub Pages
 
-The repository is a Vite static site. GitHub Pages should use **GitHub Actions** with a build of the `dist/` directory, or the existing Pages branch configuration if maintained separately. The CI workflow in `.github/workflows/ci.yml` runs `npm install` and `npm run build` on every push to `main`.
+De Vite-build wordt door GitHub Actions gebouwd naar de map `dist/`. De CI-workflow `.github/workflows/ci.yml` controleert `npm install` en `npm run build` bij iedere push naar `main`. De GitHub Pages-bron moet op **GitHub Actions** staan.
 
-## Photo sources and licences
+## Foto's en licenties
 
-- Cockpit overview — Curimedia, Wikimedia Commons, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/): https://commons.wikimedia.org/wiki/File:Airbus_A320-214_Vueling_EC-HHA_cockpit_(5508849819).jpg
-- Main panel — Curimedia, Wikimedia Commons, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/): https://commons.wikimedia.org/wiki/File:Main_panel_taxi_with_one-engine_(5669062307).jpg
+- Cockpitoverzicht — Curimedia, Wikimedia Commons, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/): https://commons.wikimedia.org/wiki/File:Airbus_A320-214_Vueling_EC-HHA_cockpit_(5508849819).jpg
+- Main instrument panel — Curimedia, Wikimedia Commons, [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/): https://commons.wikimedia.org/wiki/File:Main_panel_taxi_with_one-engine_(5669062307).jpg
 - Overhead panel — Olivier Cleynen, Wikimedia Commons, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/): https://commons.wikimedia.org/wiki/File:Overhead_panel_of_an_Airbus_A320_during_cruise.jpg
 - Center pedestal — Olivier Cleynen, Wikimedia Commons, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/): https://commons.wikimedia.org/wiki/File:Thrust_levers_of_an_Airbus_A320.jpg
 - MCDU — Christoph Paulus, Wikimedia Commons, public domain: https://commons.wikimedia.org/wiki/File:CP_MCDU.jpg
+- Circuit-breaker panel — Dreznicek009, Wikimedia Commons, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): https://commons.wikimedia.org/wiki/File:A320_CB_Panel.jpg
 
-Attribution is also displayed below each photo on the website.
+De auteur, bron en licentie worden ook direct onder elke foto getoond. De gebruikte circuit-breakerfoto is een A320-panelopname; de individuele circuitnamen moeten altijd worden gelezen vanaf de bijbehorende geprinte labels.
 
-## Important limitations
+## Belangrijke grenzen
 
-The images are representative A320-family references, not all from the same aircraft registration or operator. A320ceo panels vary with aircraft serial number, modification status, avionics standard and airline options. Markers identify visible controls in these selected reference photographs; they do not claim to cover every possible installed option, hidden circuit breaker or every variant. A marker may describe a named button or switch visible in the photograph; where a photo does not show an item clearly, the catalogue explains the system without implying a precise physical location.
+De foto's tonen representatieve A320-family-uitvoeringen en zijn niet allemaal uit hetzelfde vliegtuig. A320ceo-cockpits kunnen verschillen door serienummer, avionica-standaard, modificaties en operatoropties. Markeringen leggen zichtbare bedieningselementen uit. Bij de circuit breakers verwijzen markers naar de afzonderlijke fysieke posities per rij en kolom; gebruik de geprinte circuitnaam om het exacte circuit te bepalen. Er zijn geen claims dat ieder verborgen circuit, iedere optie of elk toesteltype is afgedekt.
 
-This is an educational familiarisation resource, not a certified simulator, checklist or source for operating procedures. For flight operations, use current approved aircraft documentation and qualified instruction.
+Circuit breakers zijn beveiligingen voor elektrische circuits, geen normale bedieningsknoppen. Niet resetten, indrukken of uittrekken zonder de juiste bevoegdheid en goedgekeurde onderhoudsprocedure.
+
+Deze atlas is educatief en geen gecertificeerde simulator, checklist of operationele handleiding. Gebruik voor echte vluchtuitvoering altijd actuele, goedgekeurde documentatie en bevoegde instructeurs.
